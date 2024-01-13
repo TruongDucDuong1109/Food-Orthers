@@ -1,25 +1,33 @@
+// Index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './screen/Home/Home';
 
-export default function Index() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element= {<App/>}/>
-      </Routes>
-    </BrowserRouter>
-  );
-  
-}
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ShowProduct from './screen/Admin/ShowProduct';
+import Login from './screen/Login/Login'; 
+import SignUp from './screen/SignUp/SignUp';
+
+const Index = () => {
+    const isLoggedIn = !!localStorage.getItem('token');
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/home" element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
+                <Route path="/admin" element={isLoggedIn ? <ShowProduct /> : <Navigate to="/login" />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<SignUp />} />
+            </Routes>
+        </BrowserRouter>
+    );
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Index/>);
+root.render(<Index />);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

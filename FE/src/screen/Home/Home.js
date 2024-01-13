@@ -1,59 +1,44 @@
-import React from 'react'
-import {useState , useEffect} from 'react'
-import postServices from '../../services/postServices'
+import { useState, useEffect } from "react";
+import postServices from "../../services/postServices";
+// import UpdateModal from "../Admin/UpdateModal";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 function Home() {
-  const [title , setTitle] = useState('')
-  const [date , setDate] = useState('')
-  const [image , setImage] = useState('')
-  const [message , setMessage] = useState('')
+  const [posts, setPosts] = useState({});
 
-  const handlesubmit = async (e) => {
-    e.preventDefault()
-    const formData = new FormData()
-    formData.append('title' , title)
-    formData.append('date' , date)
-    formData.append('image' , image)
-    const response = await postServices.create(formData)
-    e.target.reset()
+  const fetchPost = async () => {
+    setPosts(await postServices.getPost());
+  };
 
-    if(response.data.success == true){
-      setMessage('Post created successfully')
-  }else{
-    setMessage('Post created failed')
-  }
+  useEffect(() => {
+    fetchPost();
+  }, [posts]);
 
-  setTimeout(() => {
-    setMessage('')
-  }, 2000)
-  }
   return (
-    <>
+    <div>
       <h1>Home</h1>
-      <form onSubmit={handlesubmit}> 
-        <input type='text'
-          name='title'
-          placeholder='Enter title'
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <br/>
-        <input type='date'
-          name='date'
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
-        <br/>
-        <input type='file'
-          name='image'
-          onChange={(e) => setImage(e.target.files[0])}
-          required
-        />
-        <br/>
-        <button type='submit'>Submit</button>
-      </form>
-      <p>{message}</p>
-    </>
-  )
+      {posts.data !== undefined &&
+        posts.data.data.length > 0 &&
+        posts.data.data.map((posts, index) => {
+          return (
+            <div class="d-flex flex-column">
+              <Card style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={'http://127.0.0.1:5000/api/postImages/'+posts.image} alt="" height={300} width={300}/>
+                <Card.Body>
+                  <Card.Title>{posts.title}</Card.Title>
+                  <Card.Text>
+                    {posts.date}
+                  </Card.Text>
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            </div>
+          );
+        })}
+    </div>
+  );
 }
 
-export default Home
+export default Home;

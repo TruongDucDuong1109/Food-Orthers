@@ -1,6 +1,4 @@
-require("dotenv").config();
-
-
+// server.js
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -15,10 +13,10 @@ const path = require("path");
 const { connect } = require("./Database");
 connect();
 
-
-
 const post_route = require("./routes/postRoute");
-app.use('/api', post_route)
+const auth_route = require("./routes/authRoute");
+app.use('/api', post_route);
+app.use('/api', auth_route);
 
 const server = app.listen(process.env.PORT || 5000);
 const portNumber = server.address().port;
