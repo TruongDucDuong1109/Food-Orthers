@@ -10,7 +10,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ShowProduct from './screen/Admin/ShowProduct';
 import Login from './screen/Login/Login'; 
 import SignUp from './screen/SignUp/SignUp';
-
+import AdminOrderPage from './screen/Admin/AdminOrderPage';
+import ShowCart from './screen/Admin/ShowCart';
 const Index = () => {
     const isLoggedIn = !!localStorage.getItem('token');
 
@@ -18,10 +19,13 @@ const Index = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />} />
-                <Route path="/home" element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
-                <Route path="/admin" element={isLoggedIn ? <ShowProduct /> : <Navigate to="/login" />} />
+                <Route path="/home" element={ <Home />} />
+                <Route path="/admin" element={<ShowProduct /> } />
+                <Route path="/admin/order" component={<AdminOrderPage />} />
+                <Route path="/showcart" element={<ShowCart /> } />
+
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<SignUp />} />
+                <Route path="/addp" element={<SignUp />} />
             </Routes>
         </BrowserRouter>
     );

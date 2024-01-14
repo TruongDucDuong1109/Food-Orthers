@@ -15,7 +15,9 @@ connect();
 
 const post_route = require("./routes/postRoute");
 const auth_route = require("./routes/authRoute");
+const cartRoute = require("./routes/cartRoute");
 app.use('/api', post_route);
+app.use('/api/cart', cartRoute);
 app.use('/api', auth_route);
 
 const server = app.listen(process.env.PORT || 5000);

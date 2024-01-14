@@ -17,4 +17,4 @@ const postSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Post", postSchema, "OrdersFood")
+module.exports = mongoose.model("Post", postSchema, "Post")

@@ -1,6 +1,6 @@
 const Post = require("../models/postModel");
-const User = require('../models/userModel');
-const authenticateToken = require('../middleware/authMiddleware');
+// const User = require('../models/userModel');
+// const authenticateToken = require('../middleware/authMiddleware');
 
 const createPost = async (req, res) => {
   try {
