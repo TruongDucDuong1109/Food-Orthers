@@ -34,8 +34,13 @@ const addToCart = async (req, res) => {
 const saveCartToDatabase = async (req, res) => {
   try {
     const cartItems = req.body.cartItems;
-
-    const savedCart = await Cart.create({ items: cartItems });
+    const fullName = req.body.fullName;
+    const family = req.body.family;
+    const savedCart = await Cart.create({
+        items: cartItems,
+        fullName: fullName,
+        family: family,
+      });
 
     res.status(200).send({ success: true, msg: "Cart information saved successfully", data: savedCart });
   } catch (error) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import postServices from "../../services/postServices";
 import UpdateModal from "../Admin/UpdateModal";
-
+import {Link} from 'react-router-dom';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function ShowProduct () {
@@ -33,16 +33,32 @@ function ShowProduct () {
   }
   return (
     <div>
-      <h1>ShowProduct</h1>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <Link class="navbar-brand" to="/home" >Sản phẩm</Link>
+    <Link class="navbar-brand" to="/showcart">Giỏ hàng</Link>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
       {
         posts.data !== undefined && posts.data.data.length > 0 && (
           <table style = {{width: '100%'}} border = '1'>
             <thead>
-              <th>Title</th>
-              <th>Data</th>
-              <th>Image</th>
-              <th>Delete</th>
-              <th>Edit</th>
+              <th>Tên</th>
+              <th>Ngày</th>
+              <th>Hình ảnh</th>
+              <th>Xóa</th>
+              <th>Chỉnh sửa</th>
             </thead>
             <tbody>
               {
@@ -52,7 +68,7 @@ function ShowProduct () {
                       <td>{posts.title}</td>
                       <td>{posts.date}</td>
                       <td><img src={'http://127.0.0.1:5000/api/postImages/'+posts.image} alt="" width={50} height={50}/></td>
-                      <td><button id = {posts._id} onClick={(e) => deletePost(posts._id,e)}>Delete</button></td>
+                      <td><button id = {posts._id} onClick={(e) => deletePost(posts._id,e)}>xóa</button></td>
                       <td><UpdateModal id = {posts._id} title={posts.title} date={posts.date}/></td>
                     </tr>
                   )

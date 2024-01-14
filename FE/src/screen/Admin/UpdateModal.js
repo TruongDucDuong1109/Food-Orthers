@@ -43,7 +43,7 @@ function UpdateModal (props) {
     return (
         <>
         <Button variant="success" onClick={initModal}>
-            edit
+            sửa
         </Button>
 
         <Modal show={isShow}>
@@ -82,10 +82,10 @@ function UpdateModal (props) {
             
             <Modal.Footer>
                 <Button variant='danger' onClick={initModal}>
-                    Close
+                    Đóng
                 </Button>
                 <Button type='submit' variant='dark'>
-                    Update
+                    Chỉnh sửa
                 </Button>
             </Modal.Footer>
             </form>

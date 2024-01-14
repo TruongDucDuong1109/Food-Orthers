@@ -28,11 +28,11 @@ function SignUp() {
   }
   return (
     <>
-      <h1>SIGNUP</h1>
+      <h1>Thêm Đồ Ăn</h1>
       <form onSubmit={handlesubmit}> 
         <input type='text'
           name='title'
-          placeholder='Enter title'
+          placeholder='Tên'
           onChange={(e) => setTitle(e.target.value)}
           required
         />
@@ -49,7 +49,7 @@ function SignUp() {
           required
         />
         <br/>
-        <button type='submit'>Submit</button>
+        <button type='submit'>Thêm</button>
       </form>
       <p>{message}</p>
     </>

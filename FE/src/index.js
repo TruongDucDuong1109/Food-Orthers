@@ -12,6 +12,7 @@ import Login from './screen/Login/Login';
 import SignUp from './screen/SignUp/SignUp';
 import AdminOrderPage from './screen/Admin/AdminOrderPage';
 import ShowCart from './screen/Admin/ShowCart';
+import Testcom from './screen/Admin/Testcom';
 const Index = () => {
     const isLoggedIn = !!localStorage.getItem('token');
 
@@ -23,9 +24,10 @@ const Index = () => {
                 <Route path="/admin" element={<ShowProduct /> } />
                 <Route path="/admin/order" component={<AdminOrderPage />} />
                 <Route path="/showcart" element={<ShowCart /> } />
+                <Route path="/test" element={<Testcom /> } />
 
                 <Route path="/login" element={<Login />} />
-                <Route path="/addp" element={<SignUp />} />
+                <Route path="/addsp" element={<SignUp />} />
             </Routes>
         </BrowserRouter>
     );

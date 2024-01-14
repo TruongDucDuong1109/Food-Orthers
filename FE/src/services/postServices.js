@@ -55,5 +55,5 @@ class Post {
     return axios.get(url);
   }
 }
-
-export default new Post();
+const post = new Post();
+export default  post;
