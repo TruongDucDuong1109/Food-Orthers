@@ -17,7 +17,7 @@
     text-align: center;
   }
 .header-item {
-    background-color: aqua;
+    /* background-color: aqua; */
 }
   
   .cart-item {
@@ -41,4 +41,11 @@
     display: flex;
     border-top: 1px solid #ddd;
   }
-  
+  .btn-delete {
+    background-color: rgb(233, 52, 52);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: 20%;
+
+  }

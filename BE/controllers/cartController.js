@@ -57,4 +57,14 @@ const getCart = async (req, res) => {
     }
 }
 
-module.exports = { addToCart, saveCartToDatabase,getCart };
+const deletecart = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Cart.deleteOne({ _id: id });
+    res.status(200).send({ success: true, msg: "delete Cart successfully" });
+  } catch (error) {
+    res.status(400).send({ success: false, msg: error.message });
+  }
+};
+
+module.exports = { addToCart, saveCartToDatabase,getCart,deletecart };

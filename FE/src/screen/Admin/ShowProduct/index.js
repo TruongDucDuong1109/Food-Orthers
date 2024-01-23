@@ -18,7 +18,12 @@ function ShowProduct () {
 
   const deletePost = async (id,e) => {
     const postElement = document.getElementById(id);
-
+    const shouldDelete = window.confirm("Bạn có chắc muốn xóa mục này?");
+      
+      if (!shouldDelete) {
+        // User clicked Cancel
+        return;
+      }
     if (postElement && postElement.parentElement && postElement.parentElement.parentElement) {
         var response = await postServices.deletePost(id);
         if (response.data.success === true) {

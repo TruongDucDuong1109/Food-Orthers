@@ -7,17 +7,41 @@ import { Link } from "react-router-dom";
 function ShowCart() {
   const [posts, setPosts] = useState([]);
 
-
   const fetchPost = async () => {
     try {
       const response = await postServices.getCart();
       const sortedPosts = response.data.data
-        ? response.data.data.sort((a, b) => new Date(b.items[0].date) - new Date(a.items[0].date))
+        ? response.data.data
+            .filter((post) => post.items && post.items.length > 0) 
+            .sort((a, b) => new Date(b.items[0]?.date || 0) - new Date(a.items[0]?.date || 0))
         : [];
       setPosts(sortedPosts);
     } catch (error) {
       console.error("Error fetching cart data:", error);
       setPosts([]);
+    }
+  };
+
+  // xóa sản phẩm
+  const deleteCart = async (id) => {
+    try {
+      const shouldDelete = window.confirm("Bạn có chắc muốn xóa mục này?");
+
+      if (!shouldDelete) {
+        return;
+      }
+
+      const response = await postServices.deleteCart(id);
+
+      if (response.data.success === true) {
+        alert("Xóa thành công");
+        window.location.reload();
+      } else {
+        alert("Xóa thất bại");
+      }
+    } catch (error) {
+      console.error("Lỗi khi xóa:", error.message);
+      alert("Đã xảy ra lỗi khi xóa");
     }
   };
 
@@ -51,7 +75,7 @@ function ShowCart() {
       <div className="header d-flex">
         <div className="header-item flex-grow-1">TÊN NGƯỜI ĐẶT</div>
         <div className="header-item flex-grow-1">TỔ</div>
-        <div className="header-item flex-grow-2">SẢN PHẨM - SỐ LƯỢNG - Ngày</div>
+        <div className="header-item flex-grow-2">SẢN PHẨM - SỐ LƯỢNG - NGÀY</div>
       </div>
 
       {posts.map((post, index) => {
@@ -63,15 +87,33 @@ function ShowCart() {
             <div className="item items-container flex-grow-2">
               {post.items
                 .sort((a, b) => new Date(a.date) - new Date(b.date))
-                .map((item, itemIndex) => (
-                  <div key={itemIndex} className="item-row col-12">
-                    <div className="item">{item.title}</div>
-                    <div className="item">{item.quantity}</div>
-                    <div className="item">
-                      {new Date(item.date).toLocaleDateString("vi-VN", { weekday: 'long' })}
+                .map((item, itemIndex) => {
+                  const dayOfWeek = new Date(item.date).getDay();
+                  const dayColors = [
+                    "bg-primary",
+                    "bg-success",
+                    "bg-danger",
+                    "bg-warning",
+                    "bg-info",
+                    "bg-secondary",
+                    "bg-dark",
+                  ];
+
+                  return (
+                    <div key={itemIndex} className="item-row col-12">
+                      <div className={`item ${dayColors[dayOfWeek]}`}>{item.title}</div>
+                      <div className={`item ${dayColors[dayOfWeek]}`}>{item.quantity}</div>
+                      <div className={`item ${dayColors[dayOfWeek]}`}>
+                        {new Date(item.date).toLocaleDateString("vi-VN")}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
+              <div>
+                <button onClick={() => deleteCart(post._id)} className="btn-delete">
+                  Xóa
+                </button>
+              </div>
             </div>
           </div>
         );

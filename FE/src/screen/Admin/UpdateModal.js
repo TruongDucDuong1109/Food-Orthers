@@ -13,9 +13,10 @@ function UpdateModal (props) {
     //form updation data
     const [title , setTitle] = useState(props.title)
     const [date , setDate] = useState(props.date)
-    const [id , setId] = useState(props.id)
+    const id = useState(props.id)
     const [selectFile , setSelectedFile] = useState('')
-
+    
+    // submit form
     const handlesubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData()

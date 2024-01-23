@@ -12,6 +12,7 @@ import Login from './screen/Login/Login';
 import AdminOrderPage from './screen/Admin/AdminOrderPage';
 import ShowCart from './screen/Admin/ShowCart';
 import AddProduct from './screen/Admin/Addproduct/';
+import SortToDate from './screen/Admin/SortToDate';
 const Index = () => {
     
     return (
@@ -25,6 +26,7 @@ const Index = () => {
 
 
                 <Route path="/login" element={<Login />} />
+                <Route path="/sort" element={<SortToDate />} />
                 <Route path="/addproduct" element={<AddProduct />} />
             </Routes>
         </BrowserRouter>

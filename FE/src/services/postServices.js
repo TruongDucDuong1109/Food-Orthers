@@ -54,6 +54,10 @@ class Post {
     const url = "http://localhost:5000/api/cart/getcart";
     return axios.get(url);
   }
+  deleteCart (id) {
+    const url = "http://localhost:5000/api/cart/delete-cart/" + id;
+    return axios.get(url);
+  }
 }
 const post = new Post();
 export default  post;

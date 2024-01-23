@@ -60,6 +60,7 @@ function Home() {
 
       if (saveToDatabaseResponse.data.success) {
         alert("Thanh toán thành công");
+        window.location.reload();
         console.log(saveToDatabaseResponse.data.msg);
         console.log("Thông tin giỏ hàng:", cartItems);
       } else {
@@ -176,7 +177,7 @@ function Home() {
                 <li key={index} className="d-flex justify-content-center">
                   <div className="containerCart">
                     <h7 className="titlecart">{item.title}</h7>
-                    <h7 className="titlecart"> {formatDateToDay(item.date)}</h7>
+                    <h7 className="titlecart">Ngày: {formatDateToDay(item.date)}</h7>
                     <h7>Số lượng:</h7>
                     <input
                       type="number"

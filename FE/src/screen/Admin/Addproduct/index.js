@@ -10,6 +10,7 @@ function AddProduct() {
 
   const [message, setMessage] = useState("");
 
+  // Thêm sản phẩm
   const handlesubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
