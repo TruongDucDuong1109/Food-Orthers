@@ -1,13 +1,8 @@
-/* .header {
-    display: flex;
-    background-color: #eee;
-    font-weight: bold;
-    padding: 8px;
-  } */
+
   
   .header {
     display: flex;
-    background-color: #eee;
+    background-color: #dacece;
     font-weight: bold;
     padding: 8px;
     position: sticky;

@@ -1,0 +1,16 @@
+.table-form {
+    border: 1px solid #100f0f;
+}
+td {
+    padding: 12px;
+    
+}
+th {
+    padding: 12px;
+}
+.btn-del {
+    background-color: rgb(233, 52, 52);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}

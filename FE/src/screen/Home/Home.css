@@ -1,11 +1,41 @@
 .text-home {
   color: red;
 }
+.row-cols-md-3 {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+}
 .custom-card {
-  width: 80%;
+  width: 320px;
   min-height: 500px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   border-radius: 24px;
+  transition: transform 0.3s; 
+  flex: 0 0 calc(33.33% - 20px); /* Chia đều chiều rộng cho mỗi card, điều chỉnh giá trị theo thiết kế của bạn */
+  margin: 10px;
+}
+.custom-card:hover {
+  transform: scale(1.05); 
+}
+@media (max-width: 767px) {
+  .row-cols-md-3 {
+    justify-content: flex-start;
+  }
+}
+
+/* Khi có 2 sản phẩm, canh trái */
+@media (min-width: 768px) and (max-width: 991px) {
+  .row-cols-md-3 {
+    justify-content: flex-start;
+  }
+}
+
+/* Tối đa 3 sản phẩm trên 1 hàng */
+@media (min-width: 992px) {
+  .row-cols-md-3 {
+    justify-content: space-between;
+  }
 }
 .img-card {
   border-radius: 16px;
@@ -112,4 +142,17 @@ li {
     font-size: 20px;
     text-align: center;
     margin-left: 10px;
+}
+.daytitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(36, 55, 55);
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.select-day {
+  width: 10%;
 }

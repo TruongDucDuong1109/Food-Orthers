@@ -20,7 +20,7 @@ const addToCart = async (req, res) => {
         existingItem.quantity += quantity;
       } else {
         // Nếu sản phẩm chưa tồn tại, thêm mới
-        cart.items.push({ postId, quantity });
+        cart.items.push({ postId, quantity,date });
       }
     }
 

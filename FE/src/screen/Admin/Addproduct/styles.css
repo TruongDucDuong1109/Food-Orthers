@@ -1,0 +1,39 @@
+.container-form {
+border-radius: 10px;
+padding: 20px 20px;
+}
+.container-form {
+    background: rgb(15,102,157);
+background: linear-gradient(180deg, rgba(15,102,157,1) 0%, rgba(41,111,168,1) 9%, rgba(75,174,224,1) 55%, rgba(88,194,240,1) 71%, rgba(149,227,245,1) 100%);
+    width: 30%;
+    display: flex;
+}
+input {
+    width: 100%;
+    padding: 6px 6px; 
+    margin: 10px 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+}
+input::file-selector-button {
+    
+    color: rgb(70, 71, 72);
+    cursor: pointer;
+    border: thin solid grey;
+    border-radius: 10px;
+  }
+h1 {
+    color:  red;
+}
+.formSubmit {
+    margin: 0 auto;
+    width: 50%;
+}
+.btn-add {
+    border-radius: 10px;
+}
+.btn-add:hover {
+    background-color: rgb(0, 34, 249);
+    color: rgb(255, 255, 255);
+}

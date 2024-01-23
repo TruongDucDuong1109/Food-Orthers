@@ -8,6 +8,7 @@ const createPost = async (req, res) => {
       title: req.body.title,
       date: req.body.date,
       image: req.file.filename,
+   
     });
 
     const postData = await post.save();

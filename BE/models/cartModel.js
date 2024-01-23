@@ -6,6 +6,7 @@ const cartSchema = mongoose.Schema({
       postId: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
       quantity: { type: Number, default: 1 },
       title: { type: String },
+      date: { type: String },
      
     },
   ],

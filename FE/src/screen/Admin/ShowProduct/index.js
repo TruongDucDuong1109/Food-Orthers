@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import postServices from "../../services/postServices";
-import UpdateModal from "../Admin/UpdateModal";
+import postServices from "../../../services/postServices";
+import UpdateModal from "../UpdateModal"
 import {Link} from 'react-router-dom';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import "./showproduct.css";
 function ShowProduct () {
   
   const [posts, setPosts] = useState({});
@@ -35,9 +35,10 @@ function ShowProduct () {
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <Link class="navbar-brand" to="/home" >Sản phẩm</Link>
-    <Link class="navbar-brand" to="/showcart">Giỏ hàng</Link>
-    
+ 
+      <Link class="navbar-brand bg-success p-2 rounded text-white" to="/home" >Sản phẩm</Link>
+      <Link class="navbar-brand bg-success p-2 rounded text-white" to="/showcart" >Giỏ hàng</Link>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -52,8 +53,8 @@ function ShowProduct () {
 </nav>
       {
         posts.data !== undefined && posts.data.data.length > 0 && (
-          <table style = {{width: '100%'}} border = '1'>
-            <thead>
+          <table style = {{width: '100%'}} border = '1' className="table table-hover">
+            <thead className="">
               <th>Tên</th>
               <th>Ngày</th>
               <th>Hình ảnh</th>
@@ -64,11 +65,11 @@ function ShowProduct () {
               {
                 posts.data.data.map((posts, index) => {
                   return (
-                    <tr key={index}>
+                    <tr key={index} className="table-form ">
                       <td>{posts.title}</td>
                       <td>{posts.date}</td>
-                      <td><img src={'http://127.0.0.1:5000/api/postImages/'+posts.image} alt="" width={50} height={50}/></td>
-                      <td><button id = {posts._id} onClick={(e) => deletePost(posts._id,e)}>xóa</button></td>
+                      <td><img src={'http://127.0.0.1:5000/api/postImages/'+posts.image} alt="" width={80} height={80}/></td>
+                      <td><button id = {posts._id} onClick={(e) => deletePost(posts._id,e)} className="btn-del">Xóa</button></td>
                       <td><UpdateModal id = {posts._id} title={posts.title} date={posts.date}/></td>
                     </tr>
                   )
