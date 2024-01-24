@@ -7,7 +7,8 @@ import "./showproduct.css";
 function ShowProduct () {
   
   const [posts, setPosts] = useState({});
-  
+  const [search , serSearch] = useState('');
+
   const fetchPost = async () => {
     setPosts(await postServices.getPost());
   }
@@ -50,7 +51,7 @@ function ShowProduct () {
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={(e) => serSearch(e.target.value)} />
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
@@ -68,7 +69,10 @@ function ShowProduct () {
             </thead>
             <tbody>
               {
-                posts.data.data.map((posts, index) => {
+                posts.data.data
+                .filter((item)=> {
+                  return search === "" ? item : item.title.toLowerCase().includes(search.toLowerCase())
+                }).map((posts, index) => {
                   return (
                     <tr key={index} className="table-form ">
                       <td>{posts.title}</td>
