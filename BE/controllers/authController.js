@@ -24,21 +24,38 @@ const register = async (req, res) => {
 	}
 };
 
+// const login = async (req, res) => {
+//   try {
+//     const { error } = validated(req.body);
+//     if (error) return res.status(400).send({ message: error.details[0].message });
+
+//     const user = await User.findOne({ email: req.body.email });
+//     if (!user) return res.status(401).send({ message: "Invalid Email or Password" });
+
+//     const validPassword = await bcrypt.compare(req.body.password, user.password);
+//     if (!validPassword) return res.status(401).send({ message: "Invalid Email or Password" });
+
+//     const token = user.generateAuthToken();
+//     res.status(200).send({ data: token, message: "logged in successfully" });
+//   } catch (error) {
+//     res.status(500).send({ message: "Internal Server Error" });
+//   }
+// };
 const login = async (req, res) => {
   try {
     const { error } = validated(req.body);
     if (error) return res.status(400).send({ message: error.details[0].message });
 
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(401).send({ message: "Invalid Email or Password" });
+    if (!user) return res.status(401).send({ message: "Email hoặc Mật khẩu không hợp lệ" });
 
     const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!validPassword) return res.status(401).send({ message: "Invalid Email or Password" });
+    if (!validPassword) return res.status(401).send({ message: "Email hoặc Mật khẩu không hợp lệ" });
 
     const token = user.generateAuthToken();
-    res.status(200).send({ data: token, message: "logged in successfully" });
+    res.status(200).send({ data: { token, email: user.email, id: user._id }, message: "Đăng nhập thành công" });
   } catch (error) {
-    res.status(500).send({ message: "Internal Server Error" });
+    res.status(500).send({ message: "Lỗi máy chủ nội bộ" });
   }
 };
 const validated = (data) => {

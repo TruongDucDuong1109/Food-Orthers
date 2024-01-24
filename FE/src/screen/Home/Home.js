@@ -1,6 +1,9 @@
+//Home.js
+
 import React, { useState, useEffect } from "react";
 import postServices from "../../services/postServices";
 import Button from "react-bootstrap/Button";
+
 import Card from "react-bootstrap/Card";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
@@ -19,9 +22,11 @@ function Home() {
   };
 
   useEffect(() => {
-    fetchPost();
-  }, [posts]);
+      fetchPost();
+  }, []);
 
+ 
+  
   // Thêm sản phẩm vào giỏ hàng
   const handleBuyClick = (title) => {
     if (!selectedDay) {
@@ -48,6 +53,7 @@ function Home() {
       setCartItems([...cartItems, newItem]);
     }
   };
+
   // Thanh toán giỏ hàng
   const handleBuyCartClick = async () => {
     try {
@@ -70,6 +76,8 @@ function Home() {
       console.error("Lỗi:", error.message);
     }
   };
+
+
 
   // Thay đổi số lượng sản phẩm trong giỏ hàng
   const handleQuantityChange = (index, newQuantity) => {
@@ -103,6 +111,7 @@ function Home() {
   return (
     <div>
       <h1 className="TextHeader">Đặt Hàng</h1>
+      
       <div>
         <div className="d-flex flex-row ">
           <label htmlFor="day" className="daytitle">
@@ -138,8 +147,8 @@ function Home() {
                           <Card.Body className="d-flex flex-column justify-content-center conti">
                             <Card.Title className="TitleCard">{post.title}</Card.Title>
                             {/* <Card.Text style={{ textAlign: "center" }}>{post.date}</Card.Text> */}
-                            <div className="d-flex align-items-center">
-                              <div className="mr-auto p-2">
+                            <div className="d-flex align-items-center ">
+                              <div className="mr-auto">
                                 <Button
                                   variant="primary"
                                   onClick={() => handleBuyClick(post.title)}

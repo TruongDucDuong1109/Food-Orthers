@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
 
@@ -12,22 +12,23 @@ const Login = () => {
 	};
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const url = "http://localhost:5000/api/auth/login";
-			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("token", res.data);
-			window.location = "/";
-		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-			}
-		}
-	};
+        e.preventDefault();
+        try {
+            const url = "http://localhost:5000/api/auth/login";
+            const { data: res } = await axios.post(url, data);
+            localStorage.setItem("token", res.data);
+            setIsLoggedIn(true); // Đánh dấu là đã đăng nhập
+            window.location = "/";
+        } catch (error) {
+            if (
+                error.response &&
+                error.response.status >= 400 &&
+                error.response.status <= 500
+            ) {
+                setError(error.response.data.message);
+            }
+        }
+    };
 
 	return (
 		<div className={styles.login_container}>

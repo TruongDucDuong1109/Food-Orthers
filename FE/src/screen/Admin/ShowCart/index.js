@@ -52,7 +52,7 @@ function ShowCart() {
   return (
     <div>
       <div className="container-fluid">
-        <Link className="navbar-brand bg-success p-2 rounded text-white" to="/home">
+        <Link className="navbar-brand bg-success p-2 rounded text-white" to="/">
           Home
         </Link>
         <Link className="navbar-brand bg-warning p-2 rounded text-white" to="/admin">

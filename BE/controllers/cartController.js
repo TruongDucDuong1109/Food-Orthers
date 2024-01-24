@@ -36,6 +36,7 @@ const saveCartToDatabase = async (req, res) => {
     const cartItems = req.body.cartItems;
     const fullName = req.body.fullName;
     const family = req.body.family;
+
     const savedCart = await Cart.create({
         items: cartItems,
         fullName: fullName,
