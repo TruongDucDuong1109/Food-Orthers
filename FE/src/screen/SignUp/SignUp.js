@@ -1,108 +1,103 @@
-import React from 'react'
-import {useState } from 'react'
-import postServices from '../../services/postServices'
-function SignUp() {
-  const [title , setTitle] = useState('')
-  const [date , setDate] = useState('')
-  const [image , setImage] = useState('')
-  const [message , setMessage] = useState('')
+import { useState } from "react";
+// import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./styles.module.css";
+import postService from "../../services/postServices";
 
-  const handlesubmit = async (e) => {
-    e.preventDefault()
-    const formData = new FormData()
-    formData.append('title' , title)
-    formData.append('date' , date)
-    formData.append('image' , image)
-    const response = await postServices.create(formData)
-    e.target.reset()
+const SignUp = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-    if(response.data.success === true){
-      setMessage('Post created successfully')
-  }else{
-    setMessage('Post created failed')
-  }
+  const handleChange = ({ target }) => {
+    setFormData({ ...formData, [target.name]: target.value });
+  };
 
-  setTimeout(() => {
-    setMessage('')
-  }, 2000)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const createResponse = await postService.signUp(formData);
+      console.log('Create Response:', createResponse.data);
+
+      
+
+      // Chuyển hướng sau khi đăng ký thành công
+      navigate("/login");
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+
   return (
-    <>
-      <h1>Thêm Đồ Ăn</h1>
-      <form onSubmit={handlesubmit}> 
-        <input type='text'
-          name='title'
-          placeholder='Tên'
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <br/>
-        <input type='date'
-          name='date'
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
-        <br/>
-        <input type='file'
-          name='image'
-          onChange={(e) => setImage(e.target.files[0])}
-          required
-        />
-        <br/>
-        <button type='submit'>Thêm</button>
-      </form>
-      <p>{message}</p>
-    </>
-  )
-}
+    <div className={styles.signup_container}>
+      <div className={styles.signup_form_container}>
+        <div className={styles.left}>
+          <h1>Welcome Back</h1>
+          <Link to="/login">
+            <button type="button" className={styles.white_btn}>
+              Sign in
+            </button>
+          </Link>
+        </div>
+        <div className={styles.right}>
+          <form className={styles.form_container} onSubmit={handleSubmit}>
+            <h1>Create Account</h1>
+            <input
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+              onChange={handleChange}
+              value={formData.firstName}
+              required
+              className={styles.input}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              name="lastName"
+              onChange={handleChange}
+              value={formData.lastName}
+              required
+              className={styles.input}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={handleChange}
+              value={formData.email}
+              required
+              className={styles.input}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+              value={formData.password}
+              required
+              className={styles.input}
+            />
+            {error && <div className={styles.error_msg}>{error}</div>}
+            <button type="submit" className={styles.green_btn}>
+              Sign Up
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default SignUp
-
-
-
-
-// RegisterForm.js
-// import React, { useState } from 'react';
-// import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
-
-// const SignUp = () => {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [error, setError] = useState('');
-//     const navigate = useNavigate();
-
-//     const handleRegister = async () => {
-//         try {
-//             const response = await axios.post('http://localhost:5000/api/register', { email, password });
-//             const { token, role } = response.data;
-
-//             localStorage.setItem('token', token);
-//             localStorage.setItem('role', role);
-
-//             // Chuyển hướng đến trang phù hợp dựa trên vai trò
-//             // navigate(role === 'admin' ? '/admin' : '/home');
-//         } catch (error) {
-//             console.error('Registration failed', error.response.data);
-//             setError('Registration failed');
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <h2>Register Form</h2>
-//             <div>
-//                 <label>Email:</label>
-//                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-//             </div>
-//             <div>
-//                 <label>Password:</label>
-//                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//             </div>
-//             <button onClick={handleRegister}>Register</button>
-//             {error && <p style={{ color: 'red' }}>{error}</p>}
-//         </div>
-//     );
-// };
-
-// export default SignUp;
+export default SignUp;

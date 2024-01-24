@@ -18,7 +18,7 @@ const auth_route = require("./routes/authRoute");
 const cartRoute = require("./routes/cartRoute");
 app.use('/api', post_route);
 app.use('/api/cart', cartRoute);
-app.use('/api', auth_route);
+app.use('/api/auth', auth_route);
 
 const server = app.listen(process.env.PORT || 5000);
 const portNumber = server.address().port;

@@ -58,6 +58,28 @@ class Post {
     const url = "http://localhost:5000/api/cart/delete-cart/" + id;
     return axios.get(url);
   }
+
+  signUp(formData) {
+    const url = "http://localhost:5000/api/auth/sign";
+    const config = {
+      Headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    return axios.post(url, formData, config);
+  }
+
+  login() {
+    const url = "http://localhost:5000/api/auth/login";
+    const config = {
+      Headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    return axios.post(url, config);
+  }
+
+   
 }
 const post = new Post();
 export default  post;
